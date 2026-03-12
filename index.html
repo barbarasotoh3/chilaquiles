@@ -7,25 +7,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --chili: #c0392b;
-    --chili-dark: #922b21;
-    --salsa: #e67e22;
-    --cream: #fdf6ec;
-    --warm: #f5e6d3;
-    --text: #2c1a0e;
-    --muted: #8b6f5e;
-    --card: #fffaf5;
-    --border: #e8d5c0;
-    --green: #27ae60;
+    --chili: #c0392b; --chili-dark: #922b21; --cream: #fdf6ec; --warm: #f5e6d3;
+    --text: #2c1a0e; --muted: #8b6f5e; --card: #fffaf5; --border: #e8d5c0; --green: #27ae60;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='0.6' fill='%23c0392b' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0;
-  }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='0.6' fill='%23c0392b' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+
+  /* Login */
+  .login-screen { display: none; position: fixed; inset: 0; background: var(--chili); z-index: 200; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  .login-screen.show { display: flex; }
+  .login-box { background: white; border-radius: 24px; padding: 2.5rem 2rem; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.2); animation: slideUp 0.3s ease; }
+  .login-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
+  .login-box h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--chili); margin-bottom: 0.3rem; }
+  .login-box p { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .login-box input { width: 100%; padding: 0.8rem 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1.1rem; text-align: center; letter-spacing: 0.15em; outline: none; margin-bottom: 1rem; background: var(--cream); }
+  .login-box input:focus { border-color: var(--chili); }
+  .login-box button { width: 100%; padding: 0.85rem; background: var(--chili); color: white; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+  .login-box button:hover { background: var(--chili-dark); }
+  .login-error { color: var(--chili); font-size: 0.85rem; margin-top: 0.75rem; display: none; }
+
   header { background: var(--chili); color: white; padding: 2.5rem 1.5rem 2rem; text-align: center; position: relative; overflow: hidden; }
   header::before { content: '🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶'; position: absolute; top: -8px; left: 0; right: 0; font-size: 1.2rem; opacity: 0.15; letter-spacing: 4px; white-space: nowrap; overflow: hidden; }
   header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -1px; line-height: 1; position: relative; }
@@ -99,19 +100,27 @@
 </head>
 <body>
 
+<!-- Pantalla de login -->
+<div class="login-screen show" id="loginScreen">
+  <div class="login-box">
+    <div class="login-emoji">🌶</div>
+    <h2>Chilaquiles Rankings</h2>
+    <p>Ingresa la contraseña para continuar</p>
+    <input type="password" id="pwInput" placeholder="Contraseña" autocomplete="off">
+    <button id="pwBtn">Entrar</button>
+    <div class="login-error" id="loginError">Contraseña incorrecta 🙅</div>
+  </div>
+</div>
+
 <header>
   <h1>🌶 Chilaquiles Rankings</h1>
   <p>Tu guía definitiva de los mejores chilaquiles</p>
 </header>
 
 <div class="container">
-  <button class="add-btn" id="addBtn">
-    <span>＋</span> Agregar chilaquiles
-  </button>
-
+  <button class="add-btn" id="addBtn"><span>＋</span> Agregar chilaquiles</button>
   <div class="section-title">🏆 El ranking</div>
   <div class="status-bar"><span class="dot" id="statusDot"></span> <span id="statusText">Conectando...</span></div>
-
   <div id="list">
     <div class="empty-state" id="empty" style="display:none">
       <div class="emoji">🍽️</div>
@@ -139,16 +148,14 @@
           <input type="text" id="f-location" placeholder="Roma Norte, CDMX">
         </div>
       </div>
-
       <div class="form-group">
         <label>Foto</label>
-        <div class="photo-upload" id="photo-drop">
+        <div class="photo-upload">
           <input type="file" accept="image/*" id="photoInput">
           <span id="photo-label">📷 Toca para agregar foto</span>
           <img id="photo-preview" class="photo-preview" alt="preview">
         </div>
       </div>
-
       <div style="background: var(--warm); border-radius: 12px; padding: 1rem; margin-bottom: 1.2rem;">
         <div style="font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.8rem;">Calificación por categoría</div>
         <div class="star-group"><label>🔴 Salsa</label><div class="stars" id="stars-salsa"></div></div>
@@ -156,17 +163,14 @@
         <div class="star-group"><label>🥚 Acompañamientos</label><div class="stars" id="stars-acomp"></div></div>
         <div class="star-group"><label>💰 Relación precio-calidad</label><div class="stars" id="stars-precio"></div></div>
       </div>
-
       <div class="star-group">
         <label>⭐ Calificación general</label>
         <div class="stars" id="stars-overall"></div>
       </div>
-
       <div class="form-group">
         <label>Notas</label>
         <textarea id="f-notes" placeholder="¿Qué los hizo especiales? ¿Picaban mucho?"></textarea>
       </div>
-
       <div class="form-group">
         <label>¿Regresarían?</label>
         <div class="return-toggle">
@@ -174,7 +178,6 @@
           <button id="return-no">❌ No volveríamos</button>
         </div>
       </div>
-
       <button class="save-btn" id="saveBtn">Guardar 🌶</button>
     </div>
   </div>
@@ -184,6 +187,34 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+  // --- LOGIN ---
+  const PASSWORD = 'Bsh-Cob';
+  const loginScreen = document.getElementById('loginScreen');
+  const pwInput = document.getElementById('pwInput');
+  const pwBtn = document.getElementById('pwBtn');
+  const loginError = document.getElementById('loginError');
+
+  // Check if already logged in this session
+  if (sessionStorage.getItem('chila-auth') === '1') {
+    loginScreen.classList.remove('show');
+  }
+
+  function tryLogin() {
+    if (pwInput.value === PASSWORD) {
+      sessionStorage.setItem('chila-auth', '1');
+      loginScreen.classList.remove('show');
+      loginError.style.display = 'none';
+    } else {
+      loginError.style.display = 'block';
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  }
+
+  pwBtn.onclick = tryLogin;
+  pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+  // --- FIREBASE ---
   const firebaseConfig = {
     apiKey: "AIzaSyCtg7LHUS7n6LNRHqL68GLnOglJ8A1s458",
     authDomain: "chilaquiles-a7857.firebaseapp.com",
@@ -210,7 +241,7 @@
     render();
     document.getElementById('statusDot').classList.add('connected');
     document.getElementById('statusText').textContent = `${entries.length} lugar${entries.length !== 1 ? 'es' : ''} guardado${entries.length !== 1 ? 's' : ''} · sincronizado`;
-  }, (err) => {
+  }, () => {
     document.getElementById('statusText').textContent = 'Error de conexión';
   });
 
@@ -227,6 +258,7 @@
         container.appendChild(btn);
       }
       renderStars(key, 0);
+      starValues[key] = 0;
     });
   }
 
@@ -264,9 +296,7 @@
 
   // Modal
   function openModal(idx = null) {
-    editDocId = null;
-    currentReturn = null;
-    currentPhoto = null;
+    editDocId = null; currentReturn = null; currentPhoto = null;
     initStars();
     document.getElementById('photo-preview').style.display = 'none';
     document.getElementById('photo-label').textContent = '📷 Toca para agregar foto';
@@ -285,8 +315,7 @@
       if (e.photo) {
         currentPhoto = e.photo;
         const preview = document.getElementById('photo-preview');
-        preview.src = e.photo;
-        preview.style.display = 'block';
+        preview.src = e.photo; preview.style.display = 'block';
         document.getElementById('photo-label').textContent = '✓ Foto cargada';
       }
     } else {
@@ -307,14 +336,11 @@
   document.getElementById('closeBtn').onclick = closeModal;
   document.getElementById('return-yes').onclick = () => setReturn('yes');
   document.getElementById('return-no').onclick = () => setReturn('no');
-  document.getElementById('modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
+  document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
 
   document.getElementById('saveBtn').onclick = async () => {
     const name = document.getElementById('f-name').value.trim();
     if (!name) { alert('Por favor escribe el nombre del restaurante'); return; }
-
     const entry = {
       name,
       location: document.getElementById('f-location').value.trim(),
@@ -325,7 +351,6 @@
       photo: currentPhoto || null,
       date: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' })
     };
-
     if (editDocId) {
       await updateDoc(doc(db, 'chilaquiles', editDocId), entry);
     } else {
@@ -334,12 +359,10 @@
     closeModal();
   };
 
-  // Delete (exposed globally for inline onclick)
   window.deleteEntry = async (idx) => {
     if (!confirm('¿Eliminar esta entrada?')) return;
     await deleteDoc(doc(db, 'chilaquiles', entries[idx].id));
   };
-
   window.editEntry = (idx) => openModal(idx);
 
   function starsDisplay(n) {
@@ -350,11 +373,7 @@
   function render() {
     const cards = document.getElementById('cards');
     const empty = document.getElementById('empty');
-    if (entries.length === 0) {
-      empty.style.display = 'block';
-      cards.innerHTML = '';
-      return;
-    }
+    if (entries.length === 0) { empty.style.display = 'block'; cards.innerHTML = ''; return; }
     empty.style.display = 'none';
     cards.innerHTML = entries.map((e, i) => `
       <div class="rank-card">
