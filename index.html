@@ -212,10 +212,10 @@
         <!-- Bárbara -->
         <div class="rating-panel barb">
           <div class="rating-panel-title">❤️ Bárbara</div>
+          <div class="star-group"><label>Presentación</label><div class="stars" id="b-stars-presentacion"></div></div>
+          <div class="star-group"><label>Totopo</label><div class="stars" id="b-stars-totopo"></div></div>
           <div class="star-group"><label>Salsa - Sabor</label><div class="stars" id="b-stars-salsasabor"></div></div>
           <div class="star-group"><label>Salsa - Picante</label><div class="stars" id="b-stars-salsapicante"></div></div>
-          <div class="star-group"><label>Presentación</label><div class="stars" id="b-stars-presentacion"></div></div>
-          <div class="star-group"><label>Precio-calidad</label><div class="stars" id="b-stars-precio"></div></div>
           <div class="star-group"><label>⭐ General</label><div class="stars" id="b-stars-overall"></div></div>
           <div class="form-group" style="margin-top:0.7rem; margin-bottom:0">
             <label>¿Regresaría?</label>
@@ -228,10 +228,10 @@
         <!-- Carlos -->
         <div class="rating-panel carlos">
           <div class="rating-panel-title">💙 Carlos</div>
+          <div class="star-group"><label>Presentación</label><div class="stars" id="c-stars-presentacion"></div></div>
+          <div class="star-group"><label>Totopo</label><div class="stars" id="c-stars-totopo"></div></div>
           <div class="star-group"><label>Salsa - Sabor</label><div class="stars" id="c-stars-salsasabor"></div></div>
           <div class="star-group"><label>Salsa - Picante</label><div class="stars" id="c-stars-salsapicante"></div></div>
-          <div class="star-group"><label>Presentación</label><div class="stars" id="c-stars-presentacion"></div></div>
-          <div class="star-group"><label>Precio-calidad</label><div class="stars" id="c-stars-precio"></div></div>
           <div class="star-group"><label>⭐ General</label><div class="stars" id="c-stars-overall"></div></div>
           <div class="form-group" style="margin-top:0.7rem; margin-bottom:0">
             <label>¿Regresaría?</label>
@@ -290,9 +290,9 @@
   let editDocId = null;
   let currentSort = 'avg';
   let photos = [null, null];
-  const starKeys = ['salsasabor', 'salsapicante', 'presentacion', 'precio', 'overall'];
-  const bVals = { salsa:0, totopos:0, acomp:0, precio:0, overall:0 };
-  const cVals = { salsa:0, totopos:0, acomp:0, precio:0, overall:0 };
+  const starKeys = ["presentacion", "totopo", "salsasabor", "salsapicante", "overall"];
+  const bVals = { presentacion:0, totopo:0, salsasabor:0, salsapicante:0, overall:0 };
+  const cVals = { presentacion:0, totopo:0, salsasabor:0, salsapicante:0, overall:0 };
   let bReturn = null, cReturn = null;
 
   // Listener
@@ -492,20 +492,20 @@
                 <div class="score-name">❤️ Bárbara</div>
                 <div class="score-overall">${stars(e.barb?.stars?.overall)}</div>
                 <div class="score-cats">
-                  ${e.barb?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.barb.stars.salsasabor)}</span></span>` : ''}
-                  ${e.barb?.stars?.salsapicante ? `<span class="score-cat"><span>Salsa Picante</span><span>${stars(e.barb.stars.salsapicante)}</span></span>` : ''}
-                  ${e.barb?.stars?.presentacion ? `<span class="score-cat"><span>Presentación</span><span>${stars(e.barb.stars.presentacion)}</span></span>` : ''}
-                  ${e.barb?.stars?.precio ? `<span class="score-cat"><span>Precio</span><span>${stars(e.barb.stars.precio)}</span></span>` : ''}
+                  ${e.barb?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.barb.stars.presentacion)}</span></span>` : ''}
+                  ${e.barb?.stars?.totopo ? `<span class="score-cat"><span>Totopo</span><span>${stars(e.barb.stars.totopo)}</span></span>` : ''}
+                  ${e.barb?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.barb.stars.presentacion)}</span></span>` : ''}
+                  ${e.barb?.stars?.salsapicante ? `<span class="score-cat"><span>Salsa Picante</span><span>${stars(e.barb.stars.totopo)}</span></span>` : ''}
                 </div>
               </div>
               <div class="score-block carlos">
                 <div class="score-name">💙 Carlos</div>
                 <div class="score-overall">${stars(e.carlos?.stars?.overall)}</div>
                 <div class="score-cats">
-                  ${e.carlos?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.carlos.stars.salsasabor)}</span></span>` : ''}
-                  ${e.carlos?.stars?.salsapicante ? `<span class="score-cat"><span>Salsa Picante</span><span>${stars(e.carlos.stars.salsapicante)}</span></span>` : ''}
-                  ${e.carlos?.stars?.presentacion ? `<span class="score-cat"><span>Presentación</span><span>${stars(e.carlos.stars.presentacion)}</span></span>` : ''}
-                  ${e.carlos?.stars?.precio ? `<span class="score-cat"><span>Precio</span><span>${stars(e.carlos.stars.precio)}</span></span>` : ''}
+                  ${e.carlos?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.carlos.stars.presentacion)}</span></span>` : ''}
+                  ${e.carlos?.stars?.totopo ? `<span class="score-cat"><span>Totopo</span><span>${stars(e.carlos.stars.totopo)}</span></span>` : ''}
+                  ${e.carlos?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.carlos.stars.presentacion)}</span></span>` : ''}
+                  ${e.carlos?.stars?.salsapicante ? `<span class="score-cat"><span>Salsa Picante</span><span>${stars(e.carlos.stars.totopo)}</span></span>` : ''}
                 </div>
               </div>
             </div>
