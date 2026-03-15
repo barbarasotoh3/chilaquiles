@@ -15,31 +15,28 @@
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='0.6' fill='%23c0392b' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
 
-  /* Login */
   .login-screen { display: none; position: fixed; inset: 0; background: var(--chili); z-index: 200; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
   .login-screen.show { display: flex; }
-  .login-box { background: white; border-radius: 24px; padding: 2.5rem 2rem; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.2); animation: slideUp 0.3s ease; }
-  .login-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
-  .login-box h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--chili); margin-bottom: 0.3rem; }
+  .login-box { background: white; border-radius: 24px; padding: 2.5rem 2rem; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.2); }
+  .login-box h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--chili); margin: 0.5rem 0 0.3rem; }
   .login-box p { font-size: 0.85rem; color: var(--muted); margin-bottom: 1.5rem; }
   .login-box input { width: 100%; padding: 0.8rem 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1.1rem; text-align: center; letter-spacing: 0.15em; outline: none; margin-bottom: 1rem; background: var(--cream); }
   .login-box input:focus { border-color: var(--chili); }
-  .login-box button { width: 100%; padding: 0.85rem; background: var(--chili); color: white; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
-  .login-box button:hover { background: var(--chili-dark); }
+  .login-submit { width: 100%; padding: 0.85rem; background: var(--chili); color: white; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; }
   .login-error { color: var(--chili); font-size: 0.85rem; margin-top: 0.75rem; display: none; }
 
   header { background: var(--chili); color: white; padding: 2.5rem 1.5rem 2rem; text-align: center; position: relative; overflow: hidden; }
   header::before { content: '🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶'; position: absolute; top: -8px; left: 0; right: 0; font-size: 1.2rem; opacity: 0.15; letter-spacing: 4px; white-space: nowrap; overflow: hidden; }
   header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -1px; line-height: 1; position: relative; }
   header p { margin-top: 0.5rem; font-size: 0.95rem; opacity: 0.85; font-weight: 300; position: relative; }
+
   .container { max-width: 760px; margin: 0 auto; padding: 2rem 1rem; position: relative; z-index: 1; }
   .add-btn { display: flex; align-items: center; gap: 0.5rem; background: var(--chili); color: white; border: none; padding: 0.85rem 1.5rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(192,57,43,0.35); margin-bottom: 2rem; }
   .add-btn:hover { background: var(--chili-dark); transform: translateY(-1px); }
 
-  /* Sort tabs */
   .sort-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
   .sort-tab { padding: 0.45rem 1rem; border-radius: 50px; border: 1.5px solid var(--border); background: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; color: var(--muted); transition: all 0.2s; }
-  .sort-tab.active-all { border-color: var(--chili); background: var(--chili); color: white; }
+  .sort-tab.active-avg { border-color: var(--chili); background: var(--chili); color: white; }
   .sort-tab.active-barb { border-color: var(--barb); background: var(--barb); color: white; }
   .sort-tab.active-carlos { border-color: var(--carlos); background: var(--carlos); color: white; }
 
@@ -51,6 +48,7 @@
   .modal-header h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
   .close-btn { background: rgba(255,255,255,0.2); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
   .modal-body { padding: 1.5rem; }
+
   .form-group { margin-bottom: 1.2rem; }
   .form-group label { display: block; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.4rem; }
   .form-group input, .form-group textarea { width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--text); background: var(--cream); transition: border-color 0.2s; outline: none; }
@@ -58,93 +56,90 @@
   .form-group textarea { min-height: 70px; resize: vertical; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
-  /* Photos */
   .photos-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.2rem; }
-  .photo-upload { border: 2px dashed var(--border); border-radius: 12px; padding: 1rem; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--cream); position: relative; min-height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .photo-upload { border: 2px dashed var(--border); border-radius: 12px; padding: 1rem; text-align: center; cursor: pointer; background: var(--cream); position: relative; min-height: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
   .photo-upload:hover { border-color: var(--chili); background: var(--warm); }
-  .photo-upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .photo-upload input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
   .photo-upload span { font-size: 0.8rem; color: var(--muted); }
-  .photo-preview { width: 100%; border-radius: 8px; margin-top: 0.5rem; display: none; max-height: 120px; object-fit: cover; }
-  .photo-label { font-size: 1.3rem; margin-bottom: 0.2rem; }
+  .photo-preview { width: 100%; border-radius: 8px; margin-top: 0.4rem; display: none; max-height: 100px; object-fit: cover; }
 
-  /* Dual rating panels */
   .ratings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
   .rating-panel { border-radius: 14px; padding: 1rem; }
   .rating-panel.barb { background: #fdf0ee; border: 1.5px solid #f0b8b0; }
   .rating-panel.carlos { background: #eaf4fb; border: 1.5px solid #a9cce3; }
-  .rating-panel-title { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
-  .rating-panel.barb .rating-panel-title { color: var(--barb); }
-  .rating-panel.carlos .rating-panel-title { color: var(--carlos); }
-  .star-group { margin-bottom: 0.7rem; }
-  .star-group label { display: block; font-size: 0.75rem; font-weight: 500; color: var(--muted); margin-bottom: 0.3rem; }
+  .panel-title { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+  .rating-panel.barb .panel-title { color: var(--barb); }
+  .rating-panel.carlos .panel-title { color: var(--carlos); }
+
+  .star-row { margin-bottom: 0.6rem; }
+  .star-row label { display: block; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem; }
   .stars { display: flex; gap: 2px; }
-  .stars button { background: none; border: none; font-size: 1.2rem; cursor: pointer; line-height: 1; transition: transform 0.15s; padding: 1px; filter: grayscale(1) opacity(0.3); }
-  .stars button.active { filter: none; }
+  .stars button { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 1px; filter: grayscale(1) opacity(0.3); transition: transform 0.1s; }
+  .stars button.lit { filter: none; }
   .stars button:hover { transform: scale(1.2); }
 
-  .return-toggle { display: flex; gap: 0.5rem; }
-  .return-toggle button { flex: 1; padding: 0.5rem; border: 1.5px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; color: var(--muted); }
-  .return-toggle button.selected-yes { border-color: var(--green); background: #eafaf1; color: var(--green); }
-  .return-toggle button.selected-no { border-color: var(--chili); background: #fdf0ee; color: var(--chili); }
-  .save-btn { width: 100%; padding: 0.9rem; background: var(--chili); color: white; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; margin-top: 0.5rem; transition: all 0.2s; }
-  .save-btn:hover { background: var(--chili-dark); }
+  .return-row { margin-top: 0.8rem; }
+  .return-row label { display: block; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.07em; }
+  .return-btns { display: flex; gap: 0.4rem; }
+  .return-btns button { flex: 1; padding: 0.45rem; border: 1.5px solid var(--border); border-radius: 8px; background: white; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; color: var(--muted); transition: all 0.15s; }
+  .return-btns button.yes { border-color: var(--green); background: #eafaf1; color: var(--green); }
+  .return-btns button.no { border-color: var(--chili); background: #fdf0ee; color: var(--chili); }
 
-  /* Cards */
+  .save-btn { width: 100%; padding: 0.9rem; background: var(--chili); color: white; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; margin-top: 0.5rem; }
+  .save-btn:hover { background: var(--chili-dark); }
+  .save-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
   .empty-state { text-align: center; padding: 4rem 2rem; color: var(--muted); }
-  .empty-state .emoji { font-size: 3rem; margin-bottom: 1rem; }
+  .empty-state .e { font-size: 3rem; margin-bottom: 1rem; }
   .ranking-list { display: flex; flex-direction: column; gap: 1rem; }
-  .rank-card { background: var(--card); border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .rank-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(44,26,14,0.1); }
+  .rank-card { background: var(--card); border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
+  .rank-card:hover { box-shadow: 0 8px 24px rgba(44,26,14,0.1); }
   .card-photos { display: grid; }
   .card-photos.two { grid-template-columns: 1fr 1fr; }
   .card-photo { width: 100%; height: 150px; object-fit: cover; display: block; }
   .card-body { padding: 1.1rem 1.2rem; }
-  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.8rem; }
-  .rank-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--chili); line-height: 1; min-width: 2.5rem; }
+  .card-top { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.8rem; }
+  .rank-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--chili); line-height: 1; min-width: 2.5rem; }
   .card-info { flex: 1; }
-  .card-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
-  .card-location { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
-
-  /* Dual score display */
+  .card-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
+  .card-loc { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
   .scores-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 0.7rem 0; }
   .score-block { border-radius: 10px; padding: 0.6rem 0.8rem; }
   .score-block.barb { background: #fdf0ee; }
   .score-block.carlos { background: #eaf4fb; }
-  .score-name { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.3rem; }
-  .score-block.barb .score-name { color: var(--barb); }
-  .score-block.carlos .score-name { color: var(--carlos); }
-  .score-overall { font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .score-who { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.3rem; }
+  .score-block.barb .score-who { color: var(--barb); }
+  .score-block.carlos .score-who { color: var(--carlos); }
+  .score-main { font-size: 0.95rem; margin-bottom: 0.3rem; }
   .score-cats { display: flex; flex-direction: column; gap: 2px; }
   .score-cat { font-size: 0.72rem; color: var(--muted); display: flex; justify-content: space-between; }
-
   .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.7rem; padding-top: 0.7rem; border-top: 1px solid var(--border); gap: 0.5rem; flex-wrap: wrap; }
-  .card-notes { font-size: 0.85rem; color: var(--muted); font-style: italic; flex: 1; min-width: 0; }
-  .return-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-  .return-badge { font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.5rem; border-radius: 20px; white-space: nowrap; }
-  .return-yes { background: #eafaf1; color: var(--green); }
-  .return-no { background: #fdf0ee; color: var(--chili); }
+  .card-notes { font-size: 0.85rem; color: var(--muted); font-style: italic; flex: 1; }
+  .badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .badge { font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.5rem; border-radius: 20px; }
+  .badge.yes { background: #eafaf1; color: var(--green); }
+  .badge.no { background: #fdf0ee; color: var(--chili); }
   .card-actions { display: flex; gap: 0.5rem; margin-top: 0.5rem; align-items: center; }
-  .action-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 0.3rem 0.7rem; font-size: 0.78rem; cursor: pointer; color: var(--muted); transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+  .action-btn { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 0.3rem 0.7rem; font-size: 0.78rem; cursor: pointer; color: var(--muted); font-family: 'DM Sans', sans-serif; }
   .action-btn:hover { border-color: var(--chili); color: var(--chili); }
   .action-btn.del:hover { border-color: #e74c3c; color: #e74c3c; }
-  .section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
   .status-bar { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.4rem; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: #ccc; display: inline-block; }
-  .dot.connected { background: var(--green); }
-  @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } .ratings-grid { grid-template-columns: 1fr; } .scores-row { grid-template-columns: 1fr; } }
+  .dot.on { background: var(--green); }
+  @media (max-width: 500px) { .form-row, .ratings-grid, .scores-row { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- Login -->
 <div class="login-screen show" id="loginScreen">
   <div class="login-box">
-    <div class="login-emoji">🌶</div>
+    <div style="font-size:3rem">🌶</div>
     <h2>Chilaquiles Rankings</h2>
-    <p>Ingresa la contraseña para continuar</p>
+    <p>Ingresa la contraseña</p>
     <input type="password" id="pwInput" placeholder="Contraseña" autocomplete="off">
-    <button id="pwBtn">Entrar</button>
+    <button class="login-submit" id="pwBtn">Entrar</button>
     <div class="login-error" id="loginError">Contraseña incorrecta 🙅</div>
   </div>
 </div>
@@ -156,98 +151,69 @@
 
 <div class="container">
   <button class="add-btn" id="addBtn"><span>＋</span> Agregar chilaquiles</button>
-
   <div class="section-title">🏆 El ranking</div>
   <div class="sort-tabs">
-    <button class="sort-tab active-all" data-sort="avg" id="tab-avg">⭐ Promedio</button>
-    <button class="sort-tab" data-sort="barb" id="tab-barb">❤️ Bárbara</button>
-    <button class="sort-tab" data-sort="carlos" id="tab-carlos">💙 Carlos</button>
+    <button class="sort-tab active-avg" data-sort="avg">⭐ Promedio</button>
+    <button class="sort-tab" data-sort="barb">❤️ Bárbara</button>
+    <button class="sort-tab" data-sort="carlos">💙 Carlos</button>
   </div>
-  <div class="status-bar"><span class="dot" id="statusDot"></span> <span id="statusText">Conectando...</span></div>
-  <div id="list">
-    <div class="empty-state" id="empty" style="display:none">
-      <div class="emoji">🍽️</div>
-      <p>Todavía no hay chilaquiles rankeados.<br>¡Agrega el primero!</p>
-    </div>
-    <div class="ranking-list" id="cards"></div>
-  </div>
+  <div class="status-bar"><span class="dot" id="dot"></span><span id="statusMsg">Conectando...</span></div>
+  <div class="empty-state" id="empty" style="display:none"><div class="e">🍽️</div><p>Todavía no hay chilaquiles.<br>¡Agrega el primero!</p></div>
+  <div class="ranking-list" id="cards"></div>
 </div>
 
 <!-- Modal -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-header">
-      <h2 id="modal-title">Nuevos Chilaquiles</h2>
+      <h2 id="modalTitle">Nuevos Chilaquiles</h2>
       <button class="close-btn" id="closeBtn">✕</button>
     </div>
     <div class="modal-body">
       <div class="form-row">
-        <div class="form-group">
-          <label>Restaurante</label>
-          <input type="text" id="f-name" placeholder="El Cardenal...">
-        </div>
-        <div class="form-group">
-          <label>Colonia / Ciudad</label>
-          <input type="text" id="f-location" placeholder="Roma Norte, CDMX">
-        </div>
+        <div class="form-group"><label>Restaurante</label><input type="text" id="fName" placeholder="El Cardenal..."></div>
+        <div class="form-group"><label>Colonia / Ciudad</label><input type="text" id="fLoc" placeholder="Roma Norte, CDMX"></div>
       </div>
-
       <div class="form-group"><label>Fotos (máx. 2)</label></div>
       <div class="photos-row">
         <div class="photo-upload">
-          <input type="file" accept="image/*" id="photoInput1">
-          <div class="photo-label">📷</div>
-          <span id="photo-label-1">Foto 1</span>
-          <img id="photo-preview-1" class="photo-preview" alt="">
+          <input type="file" accept="image/*" id="photo1">
+          <span>📷</span><span id="lbl1">Foto 1</span>
+          <img id="prev1" class="photo-preview">
         </div>
         <div class="photo-upload">
-          <input type="file" accept="image/*" id="photoInput2">
-          <div class="photo-label">📷</div>
-          <span id="photo-label-2">Foto 2</span>
-          <img id="photo-preview-2" class="photo-preview" alt="">
+          <input type="file" accept="image/*" id="photo2">
+          <span>📷</span><span id="lbl2">Foto 2</span>
+          <img id="prev2" class="photo-preview">
         </div>
       </div>
-
       <div class="ratings-grid">
-        <!-- Bárbara -->
         <div class="rating-panel barb">
-          <div class="rating-panel-title">❤️ Bárbara</div>
-          <div class="star-group"><label>Presentación</label><div class="stars" id="b-stars-presentacion"></div></div>
-          <div class="star-group"><label>Totopo</label><div class="stars" id="b-stars-totopo"></div></div>
-          <div class="star-group"><label>Salsa - Sabor</label><div class="stars" id="b-stars-salsasabor"></div></div>
-          <div class="star-group"><label>Salsa - Picante</label><div class="stars" id="b-stars-salsapicante"></div></div>
-          <div class="star-group"><label>⭐ General</label><div class="stars" id="b-stars-overall"></div></div>
-          <div class="form-group" style="margin-top:0.7rem; margin-bottom:0">
+          <div class="panel-title">❤️ Bárbara</div>
+          <div class="star-row"><label>Presentación</label><div class="stars" id="b-presentacion"></div></div>
+          <div class="star-row"><label>Totopo</label><div class="stars" id="b-totopo"></div></div>
+          <div class="star-row"><label>Salsa - Sabor</label><div class="stars" id="b-salsasabor"></div></div>
+          <div class="star-row"><label>Salsa - Picante</label><div class="stars" id="b-salsapicante"></div></div>
+          <div class="star-row"><label>⭐ General</label><div class="stars" id="b-overall"></div></div>
+          <div class="return-row">
             <label>¿Regresaría?</label>
-            <div class="return-toggle">
-              <button id="b-return-yes">✅ Sí</button>
-              <button id="b-return-no">❌ No</button>
-            </div>
+            <div class="return-btns"><button id="bYes">✅ Sí</button><button id="bNo">❌ No</button></div>
           </div>
         </div>
-        <!-- Carlos -->
         <div class="rating-panel carlos">
-          <div class="rating-panel-title">💙 Carlos</div>
-          <div class="star-group"><label>Presentación</label><div class="stars" id="c-stars-presentacion"></div></div>
-          <div class="star-group"><label>Totopo</label><div class="stars" id="c-stars-totopo"></div></div>
-          <div class="star-group"><label>Salsa - Sabor</label><div class="stars" id="c-stars-salsasabor"></div></div>
-          <div class="star-group"><label>Salsa - Picante</label><div class="stars" id="c-stars-salsapicante"></div></div>
-          <div class="star-group"><label>⭐ General</label><div class="stars" id="c-stars-overall"></div></div>
-          <div class="form-group" style="margin-top:0.7rem; margin-bottom:0">
+          <div class="panel-title">💙 Carlos</div>
+          <div class="star-row"><label>Presentación</label><div class="stars" id="c-presentacion"></div></div>
+          <div class="star-row"><label>Totopo</label><div class="stars" id="c-totopo"></div></div>
+          <div class="star-row"><label>Salsa - Sabor</label><div class="stars" id="c-salsasabor"></div></div>
+          <div class="star-row"><label>Salsa - Picante</label><div class="stars" id="c-salsapicante"></div></div>
+          <div class="star-row"><label>⭐ General</label><div class="stars" id="c-overall"></div></div>
+          <div class="return-row">
             <label>¿Regresaría?</label>
-            <div class="return-toggle">
-              <button id="c-return-yes">✅ Sí</button>
-              <button id="c-return-no">❌ No</button>
-            </div>
+            <div class="return-btns"><button id="cYes">✅ Sí</button><button id="cNo">❌ No</button></div>
           </div>
         </div>
       </div>
-
-      <div class="form-group">
-        <label>Notas</label>
-        <textarea id="f-notes" placeholder="¿Qué los hizo especiales? ¿Picaban mucho?"></textarea>
-      </div>
-
+      <div class="form-group"><label>Notas</label><textarea id="fNotes" placeholder="¿Qué los hizo especiales?"></textarea></div>
       <button class="save-btn" id="saveBtn">Guardar 🌶</button>
     </div>
   </div>
@@ -257,272 +223,262 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // Login
-  const PASSWORD = 'Bsh-Cob';
-  const loginScreen = document.getElementById('loginScreen');
-  if (sessionStorage.getItem('chila-auth') === '1') loginScreen.classList.remove('show');
-  function tryLogin() {
-    if (document.getElementById('pwInput').value === PASSWORD) {
-      sessionStorage.setItem('chila-auth', '1');
-      loginScreen.classList.remove('show');
+  // ── LOGIN ──
+  const PW = 'Bsh-Cob';
+  if (sessionStorage.getItem('auth') === '1') document.getElementById('loginScreen').classList.remove('show');
+  document.getElementById('pwBtn').onclick = login;
+  document.getElementById('pwInput').onkeydown = e => { if (e.key === 'Enter') login(); };
+  function login() {
+    if (document.getElementById('pwInput').value === PW) {
+      sessionStorage.setItem('auth', '1');
+      document.getElementById('loginScreen').classList.remove('show');
     } else {
       document.getElementById('loginError').style.display = 'block';
       document.getElementById('pwInput').value = '';
-      document.getElementById('pwInput').focus();
     }
   }
-  document.getElementById('pwBtn').onclick = tryLogin;
-  document.getElementById('pwInput').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
 
-  // Firebase
-  const app = initializeApp({
+  // ── FIREBASE ──
+  const db = getFirestore(initializeApp({
     apiKey: "AIzaSyCtg7LHUS7n6LNRHqL68GLnOglJ8A1s458",
     authDomain: "chilaquiles-a7857.firebaseapp.com",
     projectId: "chilaquiles-a7857",
     storageBucket: "chilaquiles-a7857.firebasestorage.app",
     messagingSenderId: "434321840940",
     appId: "1:434321840940:web:5e79bee7e397b99099aa89"
-  });
-  const db = getFirestore(app);
-  const colRef = collection(db, 'chilaquiles');
+  }));
+  const col = collection(db, 'chilaquiles2');
 
-  let entries = [];
-  let editDocId = null;
-  let currentSort = 'avg';
+  // ── STATE ──
+  const KEYS = ['presentacion', 'totopo', 'salsasabor', 'salsapicante', 'overall'];
+  let entries = [], editId = null, sort = 'avg';
   let photos = [null, null];
-  const starKeys = ["presentacion", "totopo", "salsasabor", "salsapicante", "overall"];
-  const bVals = { presentacion:0, totopo:0, salsasabor:0, salsapicante:0, overall:0 };
-  const cVals = { presentacion:0, totopo:0, salsasabor:0, salsapicante:0, overall:0 };
-  let bReturn = null, cReturn = null;
+  let bStars = {}, cStars = {}, bRet = null, cRet = null;
 
-  // Listener
-  onSnapshot(query(colRef, orderBy('avgOverall', 'desc')), (snapshot) => {
-    entries = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+  // ── FIRESTORE LISTENER ──
+  onSnapshot(query(col, orderBy('avgOverall', 'desc')), snap => {
+    entries = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     render();
-    document.getElementById('statusDot').classList.add('connected');
-    document.getElementById('statusText').textContent = `${entries.length} lugar${entries.length !== 1 ? 'es' : ''} · sincronizado`;
-  }, () => { document.getElementById('statusText').textContent = 'Error de conexión'; });
-
-  // Sort tabs
-  document.querySelectorAll('.sort-tab').forEach(tab => {
-    tab.onclick = () => {
-      currentSort = tab.dataset.sort;
-      document.querySelectorAll('.sort-tab').forEach(t => t.className = 'sort-tab');
-      tab.classList.add(currentSort === 'avg' ? 'active-all' : currentSort === 'barb' ? 'active-barb' : 'active-carlos');
-      render();
-    };
+    document.getElementById('dot').classList.add('on');
+    document.getElementById('statusMsg').textContent = `${entries.length} lugar${entries.length !== 1 ? 'es' : ''} · sincronizado`;
+  }, () => {
+    document.getElementById('statusMsg').textContent = 'Error de conexión';
   });
 
-  // Stars init
-  function initStars() {
-    starKeys.forEach(k => {
-      bVals[k] = 0; cVals[k] = 0;
-      buildStars('b-stars-' + k, bVals, k, 'b');
-      buildStars('c-stars-' + k, cVals, k, 'c');
-    });
-  }
-
-  function buildStars(id, vals, key, prefix) {
-    const container = document.getElementById(id);
-    container.innerHTML = '';
+  // ── STARS ──
+  function buildStars(id, val = 0) {
+    const el = document.getElementById(id);
+    el.innerHTML = '';
     for (let i = 1; i <= 5; i++) {
-      const btn = document.createElement('button');
-      btn.textContent = '⭐';
-      btn.dataset.val = i;
-      btn.onclick = () => { vals[key] = i; renderStars(id, i); };
-      container.appendChild(btn);
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = '⭐';
+      b.dataset.v = i;
+      b.onclick = () => {
+        const [prefix, ...keyParts] = id.split('-');
+        const key = keyParts.join('-');
+        if (prefix === 'b') bStars[key] = i;
+        else cStars[key] = i;
+        lightStars(id, i);
+      };
+      el.appendChild(b);
     }
-    renderStars(id, 0);
+    lightStars(id, val);
   }
 
-  function renderStars(id, val) {
+  function lightStars(id, val) {
     document.querySelectorAll(`#${id} button`).forEach(b => {
-      b.classList.toggle('active', parseInt(b.dataset.val) <= val);
+      b.classList.toggle('lit', parseInt(b.dataset.v) <= val);
     });
   }
 
-  function setReturnBtn(prefix, val) {
-    if (prefix === 'b') bReturn = val;
-    else cReturn = val;
-    document.getElementById(prefix + '-return-yes').className = val === 'yes' ? 'selected-yes' : '';
-    document.getElementById(prefix + '-return-no').className = val === 'no' ? 'selected-no' : '';
+  function initAllStars(bVals = {}, cVals = {}) {
+    bStars = {}; cStars = {};
+    KEYS.forEach(k => {
+      bStars[k] = bVals[k] || 0;
+      cStars[k] = cVals[k] || 0;
+      buildStars('b-' + k, bStars[k]);
+      buildStars('c-' + k, cStars[k]);
+    });
   }
 
-  document.getElementById('b-return-yes').onclick = () => setReturnBtn('b', 'yes');
-  document.getElementById('b-return-no').onclick = () => setReturnBtn('b', 'no');
-  document.getElementById('c-return-yes').onclick = () => setReturnBtn('c', 'yes');
-  document.getElementById('c-return-no').onclick = () => setReturnBtn('c', 'no');
+  // ── RETURN BUTTONS ──
+  function setRet(who, val) {
+    if (who === 'b') bRet = val; else cRet = val;
+    document.getElementById(who + 'Yes').className = val === 'yes' ? 'yes' : '';
+    document.getElementById(who + 'No').className = val === 'no' ? 'no' : '';
+  }
+  document.getElementById('bYes').onclick = () => setRet('b', 'yes');
+  document.getElementById('bNo').onclick = () => setRet('b', 'no');
+  document.getElementById('cYes').onclick = () => setRet('c', 'yes');
+  document.getElementById('cNo').onclick = () => setRet('c', 'no');
 
-  // Photos
+  // ── PHOTOS ──
   [1, 2].forEach(n => {
-    document.getElementById('photoInput' + n).addEventListener('change', e => {
-      const file = e.target.files[0];
-      if (!file) return;
+    document.getElementById('photo' + n).onchange = e => {
+      const file = e.target.files[0]; if (!file) return;
       const reader = new FileReader();
       reader.onload = ev => {
         photos[n - 1] = ev.target.result;
-        const preview = document.getElementById('photo-preview-' + n);
-        preview.src = ev.target.result;
-        preview.style.display = 'block';
-        document.getElementById('photo-label-' + n).textContent = '✓ Cargada';
+        const p = document.getElementById('prev' + n);
+        p.src = ev.target.result; p.style.display = 'block';
+        document.getElementById('lbl' + n).textContent = '✓ Cargada';
       };
       reader.readAsDataURL(file);
-    });
+    };
   });
 
-  // Modal
+  // ── MODAL ──
   function openModal(idx = null) {
-    editDocId = null; bReturn = null; cReturn = null; photos = [null, null];
-    initStars();
+    editId = null; bRet = null; cRet = null; photos = [null, null];
+    initAllStars();
     [1, 2].forEach(n => {
-      document.getElementById('photo-preview-' + n).style.display = 'none';
-      document.getElementById('photo-label-' + n).textContent = 'Foto ' + n;
+      document.getElementById('prev' + n).style.display = 'none';
+      document.getElementById('lbl' + n).textContent = 'Foto ' + n;
+      document.getElementById('photo' + n).value = '';
     });
-    document.getElementById('b-return-yes').className = '';
-    document.getElementById('b-return-no').className = '';
-    document.getElementById('c-return-yes').className = '';
-    document.getElementById('c-return-no').className = '';
+    ['bYes','bNo','cYes','cNo'].forEach(id => document.getElementById(id).className = '');
 
     if (idx !== null) {
       const e = entries[idx];
-      editDocId = e.id;
-      document.getElementById('modal-title').textContent = 'Editar Chilaquiles';
-      document.getElementById('f-name').value = e.name || '';
-      document.getElementById('f-location').value = e.location || '';
-      document.getElementById('f-notes').value = e.notes || '';
-      // Stars
-      starKeys.forEach(k => {
-        const bv = e.barb?.stars?.[k] || 0;
-        const cv = e.carlos?.stars?.[k] || 0;
-        bVals[k] = bv; cVals[k] = cv;
-        renderStars('b-stars-' + k, bv);
-        renderStars('c-stars-' + k, cv);
+      editId = e.id;
+      document.getElementById('modalTitle').textContent = 'Editar';
+      document.getElementById('fName').value = e.name || '';
+      document.getElementById('fLoc').value = e.location || '';
+      document.getElementById('fNotes').value = e.notes || '';
+      initAllStars(e.barb?.stars || {}, e.carlos?.stars || {});
+      if (e.barb?.wouldReturn) setRet('b', e.barb.wouldReturn);
+      if (e.carlos?.wouldReturn) setRet('c', e.carlos.wouldReturn);
+      (e.photos || []).forEach((p, i) => {
+        if (!p) return;
+        photos[i] = p;
+        const el = document.getElementById('prev' + (i + 1));
+        el.src = p; el.style.display = 'block';
+        document.getElementById('lbl' + (i + 1)).textContent = '✓ Cargada';
       });
-      if (e.barb?.wouldReturn) setReturnBtn('b', e.barb.wouldReturn);
-      if (e.carlos?.wouldReturn) setReturnBtn('c', e.carlos.wouldReturn);
-      // Photos
-      if (e.photos) {
-        e.photos.forEach((p, i) => {
-          if (p) {
-            photos[i] = p;
-            const preview = document.getElementById('photo-preview-' + (i + 1));
-            preview.src = p; preview.style.display = 'block';
-            document.getElementById('photo-label-' + (i + 1)).textContent = '✓ Cargada';
-          }
-        });
-      }
     } else {
-      document.getElementById('modal-title').textContent = 'Nuevos Chilaquiles';
-      document.getElementById('f-name').value = '';
-      document.getElementById('f-location').value = '';
-      document.getElementById('f-notes').value = '';
+      document.getElementById('modalTitle').textContent = 'Nuevos Chilaquiles';
+      document.getElementById('fName').value = '';
+      document.getElementById('fLoc').value = '';
+      document.getElementById('fNotes').value = '';
     }
     document.getElementById('modal').classList.add('open');
   }
 
-  function closeModal() { document.getElementById('modal').classList.remove('open'); editDocId = null; }
-
+  function closeModal() { document.getElementById('modal').classList.remove('open'); editId = null; }
   document.getElementById('addBtn').onclick = () => openModal();
   document.getElementById('closeBtn').onclick = closeModal;
-  document.getElementById('modal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+  document.getElementById('modal').onclick = e => { if (e.target.id === 'modal') closeModal(); };
 
+  // ── SAVE ──
   document.getElementById('saveBtn').onclick = async () => {
-    const name = document.getElementById('f-name').value.trim();
-    if (!name) { alert('Por favor escribe el nombre del restaurante'); return; }
-    const avgOverall = ((bVals.overall || 0) + (cVals.overall || 0)) / 2;
-    const entry = {
-      name,
-      location: document.getElementById('f-location').value.trim(),
-      notes: document.getElementById('f-notes').value.trim(),
-      photos: [...photos],
-      barb: { stars: { ...bVals }, wouldReturn: bReturn },
-      carlos: { stars: { ...cVals }, wouldReturn: cReturn },
-      avgOverall,
-      date: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' })
-    };
-    if (editDocId) await updateDoc(doc(db, 'chilaquiles', editDocId), entry);
-    else await addDoc(colRef, entry);
-    closeModal();
+    const name = document.getElementById('fName').value.trim();
+    if (!name) { alert('Escribe el nombre del restaurante'); return; }
+    const btn = document.getElementById('saveBtn');
+    btn.disabled = true; btn.textContent = 'Guardando...';
+    try {
+      const avgOverall = ((bStars.overall || 0) + (cStars.overall || 0)) / 2;
+      const data = {
+        name,
+        location: document.getElementById('fLoc').value.trim(),
+        notes: document.getElementById('fNotes').value.trim(),
+        photos: [...photos],
+        barb: { stars: { ...bStars }, wouldReturn: bRet },
+        carlos: { stars: { ...cStars }, wouldReturn: cRet },
+        avgOverall,
+        date: new Date().toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' })
+      };
+      if (editId) await updateDoc(doc(db, 'chilaquiles2', editId), data);
+      else await addDoc(col, data);
+      closeModal();
+    } catch (err) {
+      alert('Error al guardar: ' + err.message);
+    } finally {
+      btn.disabled = false; btn.textContent = 'Guardar 🌶';
+    }
   };
 
-  window.deleteEntry = async (idx) => {
+  // ── DELETE / EDIT (global) ──
+  window.deleteEntry = async idx => {
     if (!confirm('¿Eliminar esta entrada?')) return;
-    await deleteDoc(doc(db, 'chilaquiles', entries[idx].id));
+    await deleteDoc(doc(db, 'chilaquiles2', entries[idx].id));
   };
-  window.editEntry = (idx) => openModal(idx);
+  window.editEntry = idx => openModal(idx);
 
-  function stars(n) { if (!n) return '—'; return '⭐'.repeat(n) + '☆'.repeat(5 - n); }
+  // ── SORT ──
+  document.querySelectorAll('.sort-tab').forEach(t => {
+    t.onclick = () => {
+      sort = t.dataset.sort;
+      document.querySelectorAll('.sort-tab').forEach(x => x.className = 'sort-tab');
+      t.classList.add('active-' + sort);
+      render();
+    };
+  });
 
-  function getSortedEntries() {
-    return [...entries].sort((a, b) => {
-      if (currentSort === 'barb') return (b.barb?.stars?.overall || 0) - (a.barb?.stars?.overall || 0);
-      if (currentSort === 'carlos') return (b.carlos?.stars?.overall || 0) - (a.carlos?.stars?.overall || 0);
-      return (b.avgOverall || 0) - (a.avgOverall || 0);
-    });
-  }
+  // ── RENDER ──
+  function s(n) { return n ? '⭐'.repeat(n) + '☆'.repeat(5 - n) : '—'; }
 
   function render() {
-    const cards = document.getElementById('cards');
+    const sorted = [...entries].sort((a, b) => {
+      if (sort === 'barb') return (b.barb?.stars?.overall || 0) - (a.barb?.stars?.overall || 0);
+      if (sort === 'carlos') return (b.carlos?.stars?.overall || 0) - (a.carlos?.stars?.overall || 0);
+      return (b.avgOverall || 0) - (a.avgOverall || 0);
+    });
+
     const empty = document.getElementById('empty');
-    const sorted = getSortedEntries();
+    const cards = document.getElementById('cards');
     if (sorted.length === 0) { empty.style.display = 'block'; cards.innerHTML = ''; return; }
     empty.style.display = 'none';
 
+    const LABELS = { presentacion: 'Presentación', totopo: 'Totopo', salsasabor: 'Salsa Sabor', salsapicante: 'Salsa Picante' };
+
     cards.innerHTML = sorted.map((e, i) => {
-      const photosArr = (e.photos || []).filter(Boolean);
-      const photoHtml = photosArr.length > 0
-        ? `<div class="card-photos ${photosArr.length === 2 ? 'two' : ''}">${photosArr.map(p => `<img class="card-photo" src="${p}" alt="">`).join('')}</div>`
-        : '';
-
       const origIdx = entries.findIndex(x => x.id === e.id);
+      const ph = (e.photos || []).filter(Boolean);
+      const photoHtml = ph.length
+        ? `<div class="card-photos${ph.length === 2 ? ' two' : ''}">${ph.map(p => `<img class="card-photo" src="${p}">`).join('')}</div>`
+        : '';
+      const catRows = (who, stars) => Object.entries(LABELS)
+        .filter(([k]) => stars?.[k])
+        .map(([k, lbl]) => `<span class="score-cat"><span>${lbl}</span><span>${s(stars[k])}</span></span>`)
+        .join('');
 
-      return `
-        <div class="rank-card">
-          ${photoHtml}
-          <div class="card-body">
-            <div class="card-top">
-              <div class="rank-number">#${i + 1}</div>
-              <div class="card-info">
-                <div class="card-name">${e.name}</div>
-                ${e.location ? `<div class="card-location">📍 ${e.location}</div>` : ''}
-              </div>
-            </div>
-            <div class="scores-row">
-              <div class="score-block barb">
-                <div class="score-name">❤️ Bárbara</div>
-                <div class="score-overall">${stars(e.barb?.stars?.overall)}</div>
-                <div class="score-cats">
-                  ${e.barb?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.barb.stars.presentacion)}</span></span>` : ''}
-                  ${e.barb?.stars?.totopo ? `<span class="score-cat"><span>Totopo</span><span>${stars(e.barb.stars.totopo)}</span></span>` : ''}
-                  ${e.barb?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.barb.stars.presentacion)}</span></span>` : ''}
-                  ${e.barb?.stars?.salsapicante ? `<span class="score-cat"><span>Salsa Picante</span><span>${stars(e.barb.stars.totopo)}</span></span>` : ''}
-                </div>
-              </div>
-              <div class="score-block carlos">
-                <div class="score-name">💙 Carlos</div>
-                <div class="score-overall">${stars(e.carlos?.stars?.overall)}</div>
-                <div class="score-cats">
-                  ${e.carlos?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.carlos.stars.presentacion)}</span></span>` : ''}
-                  ${e.carlos?.stars?.totopo ? `<span class="score-cat"><span>Totopo</span><span>${stars(e.carlos.stars.totopo)}</span></span>` : ''}
-                  ${e.carlos?.stars?.salsasabor ? `<span class="score-cat"><span>Salsa Sabor</span><span>${stars(e.carlos.stars.presentacion)}</span></span>` : ''}
-                  ${e.carlos?.stars?.salsapicante ? `<span class="score-cat"><span>Salsa Picante</span><span>${stars(e.carlos.stars.totopo)}</span></span>` : ''}
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <div class="card-notes">${e.notes || '<em>Sin notas</em>'}</div>
-              <div class="return-badges">
-                ${e.barb?.wouldReturn ? `<span class="return-badge ${e.barb.wouldReturn === 'yes' ? 'return-yes' : 'return-no'}">❤️ ${e.barb.wouldReturn === 'yes' ? 'Sí' : 'No'}</span>` : ''}
-                ${e.carlos?.wouldReturn ? `<span class="return-badge ${e.carlos.wouldReturn === 'yes' ? 'return-yes' : 'return-no'}">💙 ${e.carlos.wouldReturn === 'yes' ? 'Sí' : 'No'}</span>` : ''}
-              </div>
-            </div>
-            <div class="card-actions">
-              <button class="action-btn" onclick="editEntry(${origIdx})">✏️ Editar</button>
-              <button class="action-btn del" onclick="deleteEntry(${origIdx})">🗑 Eliminar</button>
-              <span style="margin-left:auto; font-size:0.75rem; color: var(--muted);">${e.date || ''}</span>
+      return `<div class="rank-card">
+        ${photoHtml}
+        <div class="card-body">
+          <div class="card-top">
+            <div class="rank-num">#${i + 1}</div>
+            <div class="card-info">
+              <div class="card-name">${e.name}</div>
+              ${e.location ? `<div class="card-loc">📍 ${e.location}</div>` : ''}
             </div>
           </div>
-        </div>`;
+          <div class="scores-row">
+            <div class="score-block barb">
+              <div class="score-who">❤️ Bárbara</div>
+              <div class="score-main">${s(e.barb?.stars?.overall)}</div>
+              <div class="score-cats">${catRows('barb', e.barb?.stars)}</div>
+            </div>
+            <div class="score-block carlos">
+              <div class="score-who">💙 Carlos</div>
+              <div class="score-main">${s(e.carlos?.stars?.overall)}</div>
+              <div class="score-cats">${catRows('carlos', e.carlos?.stars)}</div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="card-notes">${e.notes || '<em>Sin notas</em>'}</div>
+            <div class="badges">
+              ${e.barb?.wouldReturn ? `<span class="badge ${e.barb.wouldReturn === 'yes' ? 'yes' : 'no'}">❤️ ${e.barb.wouldReturn === 'yes' ? 'Sí' : 'No'}</span>` : ''}
+              ${e.carlos?.wouldReturn ? `<span class="badge ${e.carlos.wouldReturn === 'yes' ? 'yes' : 'no'}">💙 ${e.carlos.wouldReturn === 'yes' ? 'Sí' : 'No'}</span>` : ''}
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="action-btn" onclick="editEntry(${origIdx})">✏️ Editar</button>
+            <button class="action-btn del" onclick="deleteEntry(${origIdx})">🗑 Eliminar</button>
+            <span style="margin-left:auto;font-size:0.75rem;color:var(--muted)">${e.date || ''}</span>
+          </div>
+        </div>
+      </div>`;
     }).join('');
   }
 </script>
