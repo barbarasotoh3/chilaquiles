@@ -15,7 +15,8 @@
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
   body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Ccircle cx='1' cy='1' r='0.6' fill='%23c0392b' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
 
-  .login-screen { display: none; position: fixed; inset: 0; background: var(--chili); z-index: 200; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
+  /* Login */
+  .login-screen { display: none; position: fixed; inset: 0; background: var(--chili); z-index: 300; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; }
   .login-screen.show { display: flex; }
   .login-box { background: white; border-radius: 24px; padding: 2.5rem 2rem; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.2); }
   .login-box h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--chili); margin: 0.5rem 0 0.3rem; }
@@ -24,6 +25,12 @@
   .login-box input:focus { border-color: var(--chili); }
   .login-submit { width: 100%; padding: 0.85rem; background: var(--chili); color: white; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; cursor: pointer; }
   .login-error { color: var(--chili); font-size: 0.85rem; margin-top: 0.75rem; display: none; }
+
+  /* Lightbox */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 200; align-items: center; justify-content: center; cursor: zoom-out; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 95vw; max-height: 90vh; border-radius: 8px; object-fit: contain; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+  .lightbox-close { position: absolute; top: 1rem; right: 1.2rem; color: white; font-size: 2rem; cursor: pointer; line-height: 1; opacity: 0.8; }
 
   header { background: var(--chili); color: white; padding: 2.5rem 1.5rem 2rem; text-align: center; position: relative; overflow: hidden; }
   header::before { content: '🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶🌶'; position: absolute; top: -8px; left: 0; right: 0; font-size: 1.2rem; opacity: 0.15; letter-spacing: 4px; white-space: nowrap; overflow: hidden; }
@@ -97,7 +104,8 @@
   .rank-card:hover { box-shadow: 0 8px 24px rgba(44,26,14,0.1); }
   .card-photos { display: grid; }
   .card-photos.two { grid-template-columns: 1fr 1fr; }
-  .card-photo { width: 100%; height: 150px; object-fit: cover; display: block; }
+  .card-photo { width: 100%; height: 150px; object-fit: cover; display: block; cursor: zoom-in; transition: opacity 0.15s; }
+  .card-photo:hover { opacity: 0.9; }
   .card-body { padding: 1.1rem 1.2rem; }
   .card-top { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.8rem; }
   .rank-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--chili); line-height: 1; min-width: 2.5rem; }
@@ -133,6 +141,13 @@
 </head>
 <body>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lbClose">✕</span>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<!-- Login -->
 <div class="login-screen show" id="loginScreen">
   <div class="login-box">
     <div style="font-size:3rem">🌶</div>
@@ -157,7 +172,7 @@
     <button class="sort-tab" data-sort="barb">❤️ Bárbara</button>
     <button class="sort-tab" data-sort="carlos">💙 Carlos</button>
   </div>
-  <div class="status-bar"><span class="dot" id="dot"></span><span id="statusMsg">Conectando...</span></div>
+  <div class="status-bar"><span class="dot" id="dot"></span> <span id="statusMsg">Conectando...</span></div>
   <div class="empty-state" id="empty" style="display:none"><div class="e">🍽️</div><p>Todavía no hay chilaquiles.<br>¡Agrega el primero!</p></div>
   <div class="ranking-list" id="cards"></div>
 </div>
@@ -197,7 +212,7 @@
           <div class="star-row"><label>⭐ General</label><div class="stars" id="b-overall"></div></div>
           <div class="return-row">
             <label>¿Regresaría?</label>
-            <div class="return-btns"><button id="bYes">✅ Sí</button><button id="bNo">❌ No</button></div>
+            <div class="return-btns"><button type="button" id="bYes">✅ Sí</button><button type="button" id="bNo">❌ No</button></div>
           </div>
         </div>
         <div class="rating-panel carlos">
@@ -209,12 +224,12 @@
           <div class="star-row"><label>⭐ General</label><div class="stars" id="c-overall"></div></div>
           <div class="return-row">
             <label>¿Regresaría?</label>
-            <div class="return-btns"><button id="cYes">✅ Sí</button><button id="cNo">❌ No</button></div>
+            <div class="return-btns"><button type="button" id="cYes">✅ Sí</button><button type="button" id="cNo">❌ No</button></div>
           </div>
         </div>
       </div>
       <div class="form-group"><label>Notas</label><textarea id="fNotes" placeholder="¿Qué los hizo especiales?"></textarea></div>
-      <button class="save-btn" id="saveBtn">Guardar 🌶</button>
+      <button type="button" class="save-btn" id="saveBtn">Guardar 🌶</button>
     </div>
   </div>
 </div>
@@ -237,6 +252,13 @@
       document.getElementById('pwInput').value = '';
     }
   }
+
+  // ── LIGHTBOX ──
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  document.getElementById('lbClose').onclick = () => lightbox.classList.remove('open');
+  lightbox.onclick = e => { if (e.target === lightbox || e.target === lbImg) lightbox.classList.remove('open'); };
+  window.openLightbox = src => { lbImg.src = src; lightbox.classList.add('open'); };
 
   // ── FIREBASE ──
   const db = getFirestore(initializeApp({
@@ -275,8 +297,9 @@
       b.textContent = '⭐';
       b.dataset.v = i;
       b.onclick = () => {
-        const [prefix, ...keyParts] = id.split('-');
-        const key = keyParts.join('-');
+        const dash = id.indexOf('-');
+        const prefix = id.slice(0, dash);
+        const key = id.slice(dash + 1);
         if (prefix === 'b') bStars[key] = i;
         else cStars[key] = i;
         lightStars(id, i);
@@ -314,17 +337,34 @@
   document.getElementById('cNo').onclick = () => setRet('c', 'no');
 
   // ── PHOTOS ──
-  [1, 2].forEach(n => {
-    document.getElementById('photo' + n).onchange = e => {
-      const file = e.target.files[0]; if (!file) return;
+  function compressImage(file, maxW = 800, quality = 0.7) {
+    return new Promise(resolve => {
       const reader = new FileReader();
       reader.onload = ev => {
-        photos[n - 1] = ev.target.result;
-        const p = document.getElementById('prev' + n);
-        p.src = ev.target.result; p.style.display = 'block';
-        document.getElementById('lbl' + n).textContent = '✓ Cargada';
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          resolve(canvas.toDataURL('image/jpeg', quality));
+        };
+        img.src = ev.target.result;
       };
       reader.readAsDataURL(file);
+    });
+  }
+
+  [1, 2].forEach(n => {
+    document.getElementById('photo' + n).onchange = async e => {
+      const file = e.target.files[0]; if (!file) return;
+      document.getElementById('lbl' + n).textContent = 'Comprimiendo...';
+      const compressed = await compressImage(file);
+      photos[n - 1] = compressed;
+      const p = document.getElementById('prev' + n);
+      p.src = compressed; p.style.display = 'block';
+      document.getElementById('lbl' + n).textContent = '✓ Cargada';
     };
   });
 
@@ -398,7 +438,7 @@
     }
   };
 
-  // ── DELETE / EDIT (global) ──
+  // ── DELETE / EDIT ──
   window.deleteEntry = async idx => {
     if (!confirm('¿Eliminar esta entrada?')) return;
     await deleteDoc(doc(db, 'chilaquiles2', entries[idx].id));
@@ -417,6 +457,7 @@
 
   // ── RENDER ──
   function s(n) { return n ? '⭐'.repeat(n) + '☆'.repeat(5 - n) : '—'; }
+  const LABELS = { presentacion: 'Presentación', totopo: 'Totopo', salsasabor: 'Salsa Sabor', salsapicante: 'Salsa Picante' };
 
   function render() {
     const sorted = [...entries].sort((a, b) => {
@@ -424,21 +465,18 @@
       if (sort === 'carlos') return (b.carlos?.stars?.overall || 0) - (a.carlos?.stars?.overall || 0);
       return (b.avgOverall || 0) - (a.avgOverall || 0);
     });
-
     const empty = document.getElementById('empty');
     const cards = document.getElementById('cards');
     if (sorted.length === 0) { empty.style.display = 'block'; cards.innerHTML = ''; return; }
     empty.style.display = 'none';
 
-    const LABELS = { presentacion: 'Presentación', totopo: 'Totopo', salsasabor: 'Salsa Sabor', salsapicante: 'Salsa Picante' };
-
     cards.innerHTML = sorted.map((e, i) => {
       const origIdx = entries.findIndex(x => x.id === e.id);
       const ph = (e.photos || []).filter(Boolean);
       const photoHtml = ph.length
-        ? `<div class="card-photos${ph.length === 2 ? ' two' : ''}">${ph.map(p => `<img class="card-photo" src="${p}">`).join('')}</div>`
+        ? `<div class="card-photos${ph.length === 2 ? ' two' : ''}">${ph.map(p => `<img class="card-photo" src="${p}" onclick="openLightbox('${p}')">`).join('')}</div>`
         : '';
-      const catRows = (who, stars) => Object.entries(LABELS)
+      const catRows = stars => Object.entries(LABELS)
         .filter(([k]) => stars?.[k])
         .map(([k, lbl]) => `<span class="score-cat"><span>${lbl}</span><span>${s(stars[k])}</span></span>`)
         .join('');
@@ -457,12 +495,12 @@
             <div class="score-block barb">
               <div class="score-who">❤️ Bárbara</div>
               <div class="score-main">${s(e.barb?.stars?.overall)}</div>
-              <div class="score-cats">${catRows('barb', e.barb?.stars)}</div>
+              <div class="score-cats">${catRows(e.barb?.stars)}</div>
             </div>
             <div class="score-block carlos">
               <div class="score-who">💙 Carlos</div>
               <div class="score-main">${s(e.carlos?.stars?.overall)}</div>
-              <div class="score-cats">${catRows('carlos', e.carlos?.stars)}</div>
+              <div class="score-cats">${catRows(e.carlos?.stars)}</div>
             </div>
           </div>
           <div class="card-footer">
